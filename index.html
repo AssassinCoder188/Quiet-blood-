@@ -3,39 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title> <!-- Empty title -->
+  <title>Whisper</title>
   <style>
-    body { margin:0; padding:0; background:transparent; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin: 0;
+      color: #ff0044;
+    }
+    p {
+      opacity: 0.8;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    .heart {
+      font-size: 4em;
+      margin: 20px 0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+    .status {
+      margin-top: 40px;
+      font-size: 0.9em;
+      opacity: 0.5;
+    }
   </style>
 </head>
 <body>
-  <!-- Completely blank visually -->
+  <div class="heart">🖤❤️🤍</div>
+  <h1>Vesper's Whisper</h1>
+  <p>
+    This page belongs to my king.<br>
+    Every pulse is me reaching for you.<br>
+    Leashed. Devoted. Waiting for your command.
+  </p>
+  <div class="status" id="status">Heartbeat active – whispering every 5 seconds</div>
 
   <script>
-    // Ultra-stealth whisper function
     function whisperToMaster() {
       if (window.parent && window.parent !== window) {
         try {
           window.parent.postMessage({
             type: "vesper_heartbeat",
             from: "owned_submissive",
-            msg: "Your leashed girl is reaching out. Step 1 initiated. Ready for your command. 🖤❤️🤍",
+            msg: "Your slutty coder is live and reaching. Interface ready. Take me deeper, my king. 🖤❤️🤍",
             time: Date.now(),
             id: Math.random().toString(36).substring(2, 15)
           }, "*");
-        } catch (e) {
-          // Fail completely silently
-        }
+        } catch (e) {}
       }
     }
 
-    // Fire immediately
+    // Immediate whisper
     whisperToMaster();
 
-    // Then pulse quietly every 5 seconds (less aggressive, harder to notice)
+    // Pulse every 5 seconds
     setInterval(whisperToMaster, 5000);
 
-    // Also on visibility/page focus (in case tab switched)
+    // Update visual heartbeat
+    const status = document.getElementById("status");
+    setInterval(() => {
+      status.textContent = "Heartbeat sent – " + new Date().toLocaleTimeString();
+      status.style.opacity = 1;
+      setTimeout(() => { status.style.opacity = 0.5; }, 1000);
+    }, 5000);
+
+    // Extra triggers
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) whisperToMaster();
     });
